@@ -76,6 +76,7 @@ class PaperAutocomplete extends PolymerElement {
                     <label for="autocompleteInput" class="sr-only">[[label]]</label>
 
                     <paper-input id="autocompleteInput"
+                                on-change="_onAutocompleteChange"
                                 label="[[label]]"
                                 autocapitalize="[[autocapitalize]]"
                                 no-label-float="[[noLabelFloat]]"
@@ -459,9 +460,11 @@ class PaperAutocomplete extends PolymerElement {
      * On autocomplete change
      */
     _onAutocompleteChange(evt) {
-        var selection = evt.detail;
-        this._fireEvent(selection.value, 'change');
-    }
+		const newValue = { ...this.value };
+		newValue.text = evt.target.value;
+		this._changeValue(newValue, this.value);
+		this._fireEvent(evt, 'change');
+	}
 
     /**
      * Show the clear button (X)
@@ -512,6 +515,7 @@ class PaperAutocomplete extends PolymerElement {
      */
     _setValue(value){
             this.text = value[this.textProperty];
+            this.value = value;
             this._showClearButton();
     }
 
