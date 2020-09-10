@@ -451,6 +451,7 @@ class PaperAutocomplete extends PolymerElement {
     _onAutocompleteSelected(evt) {
         var selection = evt.detail.value;
         this.value = selection;
+        this._fireEvent(evt, 'change');
         if (this.autoClear === true) {
             setTimeout(this._clear.bind(this), this.clearDelay);
         }
