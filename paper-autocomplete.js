@@ -94,7 +94,6 @@ class PaperAutocomplete extends PolymerElement {
                                 maxlength$="[[maxlength]]"
                                 placeholder="[[placeholder]]"
                                 invalid="{{invalid}}"
-
                                 role="textbox"
                                 aria-autocomplete="list"
                                 aria-multiline="false"
@@ -437,30 +436,29 @@ class PaperAutocomplete extends PolymerElement {
      * On text event handler
      */
     _textObserver(text) {
+
         if (text && text.trim()) {
             this._showClearButton();
         } else {
             this._hideClearButton();
         }
+
+        let event = 'autocomplete' + this.eventNamespace + 'change';
+        this.dispatchEvent(new CustomEvent(event, {
+            detail: text,
+            bubbles: true,
+            composed: true
+        }));
     }
 
     /**
      * On autocomplete selection
      */
     _onAutocompleteSelected(evt) {
-        var selection = evt.detail.value;
-        this.value = selection;
+        this.value = evt.detail.value;
         if (this.autoClear === true) {
             setTimeout(this._clear.bind(this), this.clearDelay);
         }
-    }
-
-    /**
-     * On autocomplete change
-     */
-    _onAutocompleteChange(evt) {
-        var selection = evt.detail;
-        this._fireEvent(selection.value, 'change');
     }
 
     /**
