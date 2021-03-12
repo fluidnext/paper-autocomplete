@@ -1,6 +1,6 @@
 {
     "name": "@fluidnext-polymer/paper-autocomplete",
-    "version": "3.2.0",
+    "version": "3.2.1",
     "flat": true,
     "description": "Custom Autocomplete, used to select 1 element of an array, or one item from a data source",
     "scripts": {
