@@ -1,7 +1,6 @@
 import { html, PolymerElement } from '@polymer/polymer/polymer-element';
 import '@polymer/paper-input/paper-input';
 import '@polymer/paper-icon-button/paper-icon-button';
-import './icons/paper-input-file-icons';
 import './paper-autocomplete-suggestions';
 
 class PaperAutocomplete extends PolymerElement {
