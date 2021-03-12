@@ -95,9 +95,9 @@ jobs:
         name: Install npm
         command: npm install
 
-      - run:
-        name: Testing a component on Browsers
-        command: npm run test-chrome
+      #- run:
+      #  name: Testing a component on Browsers
+      #  command: npm run test-chrome
 
       # TODO
       - save_cache:
