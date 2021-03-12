@@ -21,26 +21,6 @@ commands:
         name: Testing a component on Browsers
         command: npm run test-chrome
 
-
-var_1: &init_machine
-  run: mkdir test-reports
-  run:
-    name: Download Selenium
-    command: |
-      curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
-  run:
-    name: Start Selenium
-    command: |
-      java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
-    background: true
-
-var_2: &install_and_test
-  run: npm install
-  run:
-    name: Testing a component on Browsers
-    command: |
-      npm run test-chrome
-
 jobs:
   test:
     docker:
@@ -61,24 +41,8 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      # Using to create folder for the selenium installation
-      # - run: mkdir test-reports
-
-      # - run:
-      #     name: Download Selenium
-      #     command: |
-      #       curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
-
-      # - run:
-      #     name: Start Selenium
-      #     command: |
-      #       java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
-      #     background: true
-
-      # # Install npm
-      # - run: npm install
-      - *init_machine
-      - *install_and_test
+      - selenium
+      - testNpm
       # TODO
       - save_cache:
           paths:
@@ -116,24 +80,8 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      # Using to create folder for the selenium installation
-      # - run: mkdir test-reports
-
-      # - run:
-      #     name: Download Selenium
-      #     command:
-      #       curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
-
-      # - run:
-      #     name: Start Selenium
-      #     command:
-      #       java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
-      #     background: true
-
-      # # Install npm
-      # - run: npm install
-      - *init_machine
-      - *install_and_test
+      - selenium
+      - testNpm
       # TODO
       - save_cache:
           paths:
