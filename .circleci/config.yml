@@ -1,26 +1,5 @@
 version: 2.1
 
-commands:
-  selenium:
-    steps:
-      - run:
-        name: Create dir
-        command: mkdir test-reports
-      - run:
-        name: Download Selenium
-        command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
-      - run:
-        name: Start Selenium
-        command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
-        background: true
-  testNpm:
-    - run:
-        name: Install npm
-        command: npm install
-    - run:
-        name: Testing a component on Browsers
-        command: npm run test-chrome
-
 jobs:
   test:
     docker:
@@ -41,8 +20,27 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - selenium
-      - testNpm
+      - run:
+        name: Create dir
+        command: mkdir test-reports
+
+      - run:
+        name: Download Selenium
+        command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+
+      - run:
+        name: Start Selenium
+        command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+        background: true
+
+      - run:
+        name: Install npm
+        command: npm install
+
+      - run:
+        name: Testing a component on Browsers
+        command: npm run test-chrome
+
       # TODO
       - save_cache:
           paths:
@@ -80,8 +78,27 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - selenium
-      - testNpm
+      - run:
+        name: Create dir
+        command: mkdir test-reports
+
+      - run:
+        name: Download Selenium
+        command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+
+      - run:
+        name: Start Selenium
+        command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+        background: true
+
+      - run:
+        name: Install npm
+        command: npm install
+
+      - run:
+        name: Testing a component on Browsers
+        command: npm run test-chrome
+
       # TODO
       - save_cache:
           paths:
