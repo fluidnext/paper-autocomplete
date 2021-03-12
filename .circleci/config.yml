@@ -1,7 +1,26 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
+version: 2.1
+
+commands:
+  selenium:
+    steps:
+      - run:
+        name: Create dir
+        command: mkdir test-reports
+      - run:
+        name: Download Selenium
+        command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      - run:
+        name: Start Selenium
+        command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+        background: true
+  testNpm:
+    - run:
+        name: Install npm
+        command: npm install
+    - run:
+        name: Testing a component on Browsers
+        command: npm run test-chrome
+
 
 var_1: &init_machine
   run: mkdir test-reports
@@ -22,7 +41,6 @@ var_2: &install_and_test
     command: |
       npm run test-chrome
 
-version: 2
 jobs:
   test:
     docker:
